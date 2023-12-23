@@ -22,12 +22,7 @@ struct WishlistContainer: View {
     private var isRefreshing = false
 
     @StateObject
-    private var wishModel: WishModel
-
-    init(wishModel: WishModel) {
-        self.wishModel = wishModel
-        self.wishModel.fetchList()
-    }
+    var wishModel: WishModel
 
     func refreshList() {
         isRefreshing = true
@@ -50,7 +45,11 @@ struct WishlistContainer: View {
             WishlistView(wishModel: wishModel, listType: $listType)
                 .background(systemBackgroundColor)
             
-        }.background(systemBackgroundColor)
+        }
+        .background(systemBackgroundColor)
+        .task {
+            wishModel.fetchList()
+        }
     }
 
     var segmentedControlView: some View {
