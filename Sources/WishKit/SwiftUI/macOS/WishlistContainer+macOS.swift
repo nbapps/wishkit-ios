@@ -21,7 +21,7 @@ struct WishlistContainer: View {
     @State
     private var isRefreshing = false
 
-    @ObservedObject
+    @StateObject
     private var wishModel: WishModel
 
     init(wishModel: WishModel) {
